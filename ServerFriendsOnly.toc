@@ -1,4 +1,6 @@
-## Interface: 20501
+## Interface: 11402
+## Interface-Wrath: 30400
+## Interface-Classic: 11402
 ## Title: Server Friends Only
 ## Notes: Adds a tab for only server friends
 ## Author: Nitrak
