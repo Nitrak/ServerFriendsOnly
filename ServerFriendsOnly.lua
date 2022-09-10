@@ -33,7 +33,6 @@ tab:HookScript("OnClick", function(self)
 	FriendsFrame_Update()
 end)
 
-local wowClasses = {"WARRIOR","HUNTER","ROGUE","WARLOCK","MAGE","DRUID","PALADIN","SHAMAN","PRIEST"}
 local isInParty = false
 local targetIsInParty = false
 local targetIsIgnored = false
@@ -401,7 +400,7 @@ function ServerFriendsOnly_Update()
 		local afk = friendsTable[friendIndex].isAFK
 		local referAFriend = friendsTable[friendIndex].referAFriend
 		local level = friendsTable[friendIndex].level
-		local class = friendsTable[friendIndex].class
+		local class = friendsTable[friendIndex].class:gsub(" ","")
 		local dnd = friendsTable[friendIndex].isDND
 		local area = friendsTable[friendIndex].zoneName
 		local notes = friendsTable[friendIndex].noteText
@@ -409,11 +408,7 @@ function ServerFriendsOnly_Update()
 
 		if connected then 
 			if(db.showNameColors) then
-				for i=1,9 do
-					if(string.upper(class)==wowClasses[i]) then
-						name = "|c"..RAID_CLASS_COLORS[string.upper(class)].colorStr..name.."|c00ffffff"
-					end
-				end
+				name = "|c"..RAID_CLASS_COLORS[string.upper(class)].colorStr..name.."|c00ffffff"
 			end
 			if(friendsTable[friendIndex].bNetAccountName~="" and db.showBNetFriends)then
 				if(db.showBNetName) then
@@ -448,13 +443,9 @@ function ServerFriendsOnly_Update()
 					end
 					if friendsTable[frameID].connected then
 						if(db.showNameColors) then
-							for i=1,9 do
-								if(string.upper(friendsTable[frameID].class)==wowClasses[i]) then
-									friendsTable[frameID].characterName = "|c"..RAID_CLASS_COLORS[string.upper(friendsTable[frameID].class)].colorStr..friendsTable[frameID].characterName.."|c00ffffff"
-								end
-							end
+							friendsTable[frameID].characterName = "|c"..RAID_CLASS_COLORS[string.upper(friendsTable[frameID].class:gsub(" ",""))].colorStr..friendsTable[frameID].characterName.."|c00ffffff"
 						end
-						local tooltipNameText = friendsTable[frameID].characterName..", Level "..friendsTable[frameID].level.." "..friendsTable[frameID].class.."\n".."|c00808080"..friendsTable[frameID].zoneName.."|c00ffffff"
+						local tooltipNameText = friendsTable[frameID].characterName..", Level "..friendsTable[frameID].level.." "..friendsTable[frameID].class:gsub(" ","").."\n".."|c00808080"..friendsTable[frameID].zoneName.."|c00ffffff"
 						GameTooltip:AddLine(tooltipNameText)
 					else
 						GameTooltip:AddLine("|c00A0A0A0"..friendsTable[frameID].characterName.." (OFFLINE)|c00ffffff")
