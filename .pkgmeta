@@ -1,0 +1,3 @@
+package-as: ServerFriendsOnly
+
+enable-nolib-creation: no
