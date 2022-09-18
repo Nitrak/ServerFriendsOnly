@@ -54,7 +54,7 @@ local lastClicked = ""
 local friendsTable = {}
 local friendsTableLength = 0
 
-local intendedWoWProject = WOW_PROJECT_CLASSIC
+local intendedWoWProject = WOW_PROJECT_WRATH_CLASSIC
 
 --[===[@non-version-retail@
 --@version-classic@
@@ -462,6 +462,7 @@ function ServerFriendsOnly_Update()
 					GameTooltip:Show()
 				end
 			  end)
+			frFrame:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD");
 			frFrame:SetScript("OnLeave",function(self)
 				GameTooltip:Hide()
 			  end)
@@ -527,7 +528,9 @@ function ServerFriendsOnly_Update()
 							InviteUnit(FriendNames[frFrame:GetID()+FauxScrollFrame_GetOffset(ServerFriendsOnlyScrollBar)]);
 						end 
 						end },
-						{ text = "Whisper", func = function() ChatFrame_OpenChat("/w "..FriendNames[frFrame:GetID()+FauxScrollFrame_GetOffset(ServerFriendsOnlyScrollBar)].." ") ; end },
+						{ text = "Whisper", func = function()
+							ChatFrame_OpenChat(SLASH_SMART_WHISPER1.." "..FriendNames[frFrame:GetID()+FauxScrollFrame_GetOffset(ServerFriendsOnlyScrollBar)].." ") ; 
+						end },
 						{ text = "Character note: "..noteText, isTitle = true, notCheckable = true},
 						{ text = "Set Character Note", func = function()
 							friendNoteName=FriendNames[frFrame:GetID()+FauxScrollFrame_GetOffset(ServerFriendsOnlyScrollBar)];
@@ -676,12 +679,11 @@ function ServerFriendsOnlyScrollBar_Update()
 				fr:SetText(txt);
 				if(lastClicked~="" and txt~=nil and string.match(txt,lastClicked)) then
 					fr:SetBackdrop({
-						bgFile="Interface\\ChatFrame\\ChatFrameBackground",
-						tile=true,
+						bgFile="Interface\\QuestFrame\\UI-QuestTitleHighlight",
+						tile=false,
 						tileSize=5,
 						edgeSize= 2,
 					})
-					fr:SetBackdropColor(0.5,0.5,0.5,0.5)
 				else
 					fr:SetBackdrop({
 									bgFile="Interface\\ChatFrame\\ChatFrameBackground",
