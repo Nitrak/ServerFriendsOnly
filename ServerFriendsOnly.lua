@@ -160,10 +160,6 @@ local function UpdateFriendTextButton()
 	fsAddFriend:SetText(addFriendButtonText)
 end
 
-
-
-
-
 local BNFriend = {}
 local BNFriend_metatab = {}
 
@@ -212,7 +208,6 @@ local function compareCharacterName(a,b)
 end
 
 local function FindFriendIndexInTable(name,maxI)
-
 	for i=1,maxI-1 do
 		if(friendsTable[i].characterName==name) then
 			return i
@@ -307,10 +302,10 @@ function ServerFriendsOnly_Update()
 	local friendIndex = 1
 	
 	StaticPopupDialogs["FRIEND_NOTE_POPUP"] = {
-	  text = "Set Notes for "..friendNoteName,
-	  button1 = "Accept",
-	  button2 = "Cancel",
-	  OnShow = function (self, data)
+		text = "Set Notes for "..friendNoteName,
+		button1 = "Accept",
+		button2 = "Cancel",
+		OnShow = function (self, data)
 					self.text:SetText("Set Notes for "..friendNoteName)
 					local note = ""
 					local frIndex = GetFriendIndex(friendNoteName)
@@ -323,7 +318,7 @@ function ServerFriendsOnly_Update()
 						self.editBox:SetText("")
 					end
 				end,
-	OnAccept = function (self, data, data2)
+		OnAccept = function (self, data, data2)
 			local text = self.editBox:GetText()
 			C_FriendList.SetFriendNotesByIndex(GetFriendIndex(friendNoteName),text)
 		end,
@@ -336,33 +331,33 @@ function ServerFriendsOnly_Update()
 		EditBoxOnEscapePressed = function(self,data, data2)
 			self:GetParent():Hide();
 		end,
-	  editBoxWidth = 350,
-	  timeout = 0,
-	  whileDead = true,
-	  hideOnEscape = 1,
-	  preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+		editBoxWidth = 350,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = 1,
+		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
 	StaticPopupDialogs["FRIEND_NOTE_AUTO_ADD_POPUP"] = {
-	  text = friendNoteName.." must be added to friends set character note",
-	  button1 = "Accept",
-	  button2 = "Cancel",
-	  OnShow = function (self, data)
+		text = friendNoteName.." must be added to friends set character note",
+		button1 = "Accept",
+		button2 = "Cancel",
+		OnShow = function (self, data)
 					self.text:SetText(friendNoteName.." must be added to friends set character note")
 				end,
-	  OnAccept = function (self)
+		OnAccept = function (self)
 			C_FriendList.AddFriend(friendNoteName)
 			StaticPopup_Show("FRIEND_NOTE_POPUP")
 		end,
-	  timeout = 0,
-	  whileDead = true,
-	  hideOnEscape = 1,
-	  preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = 1,
+		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
 	StaticPopupDialogs["FRIEND_NOTE_BN_POPUP"] = {
-	  text = "Set BattleNet Notes for "..friendNoteName,
-	  button1 = "Accept",
-	  button2 = "Cancel",
-	  OnShow = function (self, data)
+		text = "Set BattleNet Notes for "..friendNoteName,
+		button1 = "Accept",
+		button2 = "Cancel",
+		OnShow = function (self, data)
 					local note = friendsTable[bNetNoteId].noteTextBN
 					if(note~=nil) then
 						self.editBox:SetText(note)
@@ -370,7 +365,7 @@ function ServerFriendsOnly_Update()
 						self.editBox:SetText("")
 					end
 				end,
-	OnAccept = function (self, data, data2)
+		OnAccept = function (self, data, data2)
 			local text = self.editBox:GetText()
 			BNSetFriendNote(friendsTable[bNetNoteId].bNetUniqueID, text)
 			friendsTable[bNetNoteId].noteTextBN = text
@@ -385,11 +380,11 @@ function ServerFriendsOnly_Update()
 		EditBoxOnEscapePressed = function(self,data, data2)
 			self:GetParent():Hide();
 		end,
-	  editBoxWidth = 350,
-	  timeout = 0,
-	  whileDead = true,
-	  hideOnEscape = 1,
-	  preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+		editBoxWidth = 350,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = 1,
+		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
 	
 	
