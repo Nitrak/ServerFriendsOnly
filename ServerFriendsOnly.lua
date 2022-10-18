@@ -11,7 +11,6 @@ local MAX_FRIENDS = BASE_MAX_FRIENDS
 local MAX_FRIENDS_SHOWN = 9
 local ServerFriendsOnlyData = {}
 local FriendNames = {}
-local ServerFriendsOnlyDataConnected = {}
 local db
 
 local friendsFound = 0
@@ -20,7 +19,6 @@ local tabID = 1
 while _G["FriendsTabHeaderTab"..tabID] do
 	tabID = tabID + 1
 end
-local SERVERFRIENDSONLY_TAB_ID = tabID
 local tab = CreateFrame("Button", "FriendsTabHeaderTab"..tabID, FriendsTabHeader, "TabButtonTemplate")
 
 tab:SetPoint("LEFT", _G["FriendsTabHeaderTab"..(tabID-1)]:IsShown() and _G["FriendsTabHeaderTab"..(tabID-1)] or _G["FriendsTabHeaderTab"..(tabID-2)], "RIGHT", 0, 0)
@@ -139,7 +137,6 @@ hooksecurefunc("FriendsFrame_Update", function(...)
 end)
 
 local function GetFriendIndex(name)
-	local foundIndex = -1
 	for i=1,MAX_FRIENDS do
 		if(C_FriendList.GetFriendInfoByIndex(i)==nil) then
 			return -1
@@ -230,7 +227,6 @@ local function FillFriendsTable()
 			if(realmName~=nil and realmName==GetRealmName():gsub("%s+", "") and faction==UnitFactionGroup("player")) then --ADD FACTION TOGGLE LATER!?!?!?
 				local zzz = BNFriend.new(hasFocus, characterName, client, realmName, realmID, faction, race, class, guild, zoneName, level, gameText, broadcastText, broadcastTime, canSoR, bnetIDGameAccount, presenceID, characterGUID, isAFK, isDND, "", noteTextBN, isReferAFriend, canSummonFriend, true, false, true, i, bNetUniqueID, accountName)
 				friendsTable[friendsTableLength] = zzz
-				ServerFriendsOnlyDataConnected[friendsTableLength] = connected
 				friendsTableLength = friendsTableLength+1
 			end
 		end
@@ -254,7 +250,7 @@ local function FillFriendsTable()
 		local zoneName = friendInfo["area"]
 		local noteText = friendInfo["notes"]
 		if characterName ~= nil then
-			foundFriendIndex = FindFriendIndexInTable(characterName,friendsTableLength)
+			local foundFriendIndex = FindFriendIndexInTable(characterName,friendsTableLength)
 			if(foundFriendIndex == -1) then
 				local zzz = BNFriend.new(hasFocus, characterName, client, realmName, realmID, faction, race, class, guild, zoneName, level, gameText, broadcastText, broadcastTime, canSoR, bnetIDGameAccount, presenceID, characterGUID, isAFK, isDND, noteText, "", isReferAFriend, canSummonFriend, connected, true, false, -1, -1, "")
 				if(not connected) then
@@ -267,7 +263,6 @@ local function FillFriendsTable()
 					friendsTableLength = friendsTableLength+1
 					friendsFound = friendsTableLength
 				end
-				ServerFriendsOnlyDataConnected[friendsTableLength] = connected
 			else
 				friendsTable[foundFriendIndex].noteText = noteText
 				friendsTable[foundFriendIndex].isRealmFriend = true
@@ -566,7 +561,7 @@ function ServerFriendsOnly_Update()
 						end end },
 					}
 					menu[1]["text"] = self:GetText()
-					menuFrame = CreateFrame("Frame", "ServerFriendsOnlyRightClickMenuFrame", UIParent, "UIDropDownMenuTemplate")
+					local menuFrame = CreateFrame("Frame", "ServerFriendsOnlyRightClickMenuFrame", UIParent, "UIDropDownMenuTemplate")
 					
 					EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU", 2000);
 				end
@@ -626,7 +621,7 @@ function ServerFriendsOnly_Update()
 		if(UnitExists("target") and UnitPlayerControlled("target") and UnitFactionGroup("target")==UnitFactionGroup("player")) then
 			C_FriendList.AddOrRemoveFriend(UnitName("target"),"")
 		else
-			StaticPopup_Show ("ADD_FRIEND_POPUP")
+			StaticPopup_Show("ADD_FRIEND_POPUP")
 		end
 	end)
 	
@@ -656,7 +651,6 @@ function ServerFriendsOnly_Update()
 end
 
 function ServerFriendsOnlyScrollBar_Update()
-	local line; -- 1 through 5 of our window to scroll
 	local lineplusoffset; -- an index into our data calculated from the scroll offset
 	local maxShow = 9;
 	if(friendsFound<10) then
@@ -777,7 +771,7 @@ loadFrame:SetScript("OnEvent", function(self, event, isLogin, isReload)
 					end },
 							
 				}
-				menuFrame = CreateFrame("Frame", "ServerFriendsOnlyOptionsMenuFrame", UIParent, "UIDropDownMenuTemplate")
+				local menuFrame = CreateFrame("Frame", "ServerFriendsOnlyOptionsMenuFrame", UIParent, "UIDropDownMenuTemplate")
 				EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU", 2000);
 			end
 		end)
