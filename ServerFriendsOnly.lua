@@ -121,8 +121,6 @@ hooksecurefunc("FriendsFrame_Update", function(...)
 		HideTab()
 		return
 	end
-	--[[
-	]]--
 	FriendsFrameTitleText:SetText(L.TITLETEXT)
 	FriendsFrame_ShowSubFrame("ServerFriendsOnlyFrame")
 	FriendsTabHeader:Show() -- not sure why it sometimes hides itself
