@@ -524,7 +524,6 @@ function ServerFriendsOnly_Update()
 						addRemoveLocalFriendBool = true
 					end
 
-
 					local menu = {
 						{ text = "Select an Option", isTitle = true, notCheckable = true },
 						{ text = "Interact", isTitle = true, notCheckable = true },
@@ -590,7 +589,6 @@ function ServerFriendsOnly_Update()
 					EasyMenu(menu, menuFrame, "cursor", 0, 0, "MENU", 2000);
 				end
 			end)
-
 			if friendIndex == 1 then
 				frFrame:SetPoint("TOPLEFT", "ServerFriendsOnlyScrollBar", "TOPLEFT", 0, 0)
 			else
@@ -611,7 +609,6 @@ function ServerFriendsOnly_Update()
 	ServerFriendsOnlyFrame:SetHeight(314.99996948242)
 
 	ServerFriendsOnlyFrame:Show()
-
 
 	bAddFriend:SetSize(131, 21) -- width, height
 	StaticPopupDialogs["ADD_FRIEND_POPUP"] = {
@@ -649,7 +646,6 @@ function ServerFriendsOnly_Update()
 			StaticPopup_Show("ADD_FRIEND_POPUP")
 		end
 	end)
-
 
 	fsAddFriend:SetText(addFriendButtonText)
 	fsAddFriend:SetPoint("CENTER", 0, 0)
@@ -799,7 +795,6 @@ loadFrame:SetScript("OnEvent", function(self, event, isLogin, isReload)
 						db.showOffline = not db.showOffline
 						ServerFriendsOnly_Update()
 					end },
-
 				}
 				local menuFrame = CreateFrame("Frame", "ServerFriendsOnlyOptionsMenuFrame", UIParent, "UIDropDownMenuTemplate")
 				EasyMenu(menu, menuFrame, "cursor", 0, 0, "MENU", 2000);
