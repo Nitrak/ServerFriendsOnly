@@ -31,7 +31,6 @@ tab:HookScript("OnClick", function(self)
 	FriendsFrame_Update()
 end)
 
-local isInParty = false
 local targetIsInParty = false
 local targetIsIgnored = false
 local textTabOffset = "    "
@@ -465,12 +464,6 @@ function ServerFriendsOnly_Update()
 					ServerFriendsOnlyScrollBar_Update()
 					
 				else
-					if(UnitInParty("player")) then
-						isInParty = true
-					else
-						isInParty = false
-					end
-					
 					if(UnitInParty(FriendNames[frFrame:GetID()+FauxScrollFrame_GetOffset(ServerFriendsOnlyScrollBar)])) then
 						friendInvite = "Uninvite"
 						targetIsInParty = true
