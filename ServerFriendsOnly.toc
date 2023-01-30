@@ -1,5 +1,5 @@
-## Interface: 30400
-## Interface-Wrath: 30400
+## Interface: 30401
+## Interface-Wrath: 30401
 ## Interface-Classic: 11402
 ## Title: Server Friends Only
 ## Notes: Adds a tab for only server friends
