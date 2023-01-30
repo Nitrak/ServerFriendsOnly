@@ -5,7 +5,7 @@
 ## Notes: Adds a tab for only server friends
 ## Author: Nitrak
 ## SavedVariables: ServerFriendsOnlyDB
-## Version: 2.0.5
+## Version: 2.0.6
 ## X-Curse-Project-ID: 338504
 ## X-WoWI-ID: 25179
 ## X-Wago-ID: J96EjYKg
