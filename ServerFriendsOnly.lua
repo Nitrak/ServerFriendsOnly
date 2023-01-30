@@ -436,7 +436,7 @@ function ServerFriendsOnly_Update()
 			frFrame:SetID(friendIndex)
 			frFrame:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			frFrame:SetNormalFontObject("GameFontHighlightLeft")
-			frFrame:SetNormalTexture(nil)
+			--frFrame:SetNormalTexture(nil)
 			frFrame:SetScript("OnEnter", function(self)
 				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
 				local nameTooltipString = ""
