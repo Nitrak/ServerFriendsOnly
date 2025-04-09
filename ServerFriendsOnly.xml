@@ -26,18 +26,7 @@
       </OnLoad>
 	  -->
     </Scripts>
-    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true">
-	<!--edgeFile="Interface\Tooltips\UI-Tooltip-Border"-->
-      <BackgroundInsets>
-        <AbsInset left="0" right="0" top="0" bottom="0" />
-      </BackgroundInsets>
-      <TileSize>
-        <AbsValue val="16" />
-      </TileSize>
-      <EdgeSize>
-        <AbsValue val="16" />
-      </EdgeSize>
-    </Backdrop>
+
     <Frames>
       <ScrollFrame name="ServerFriendsOnlyScrollBar" inherits="FauxScrollFrameTemplate" hidden="true">
         <Anchors>

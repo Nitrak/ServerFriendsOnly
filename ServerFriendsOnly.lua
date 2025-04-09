@@ -97,6 +97,24 @@ if not IsCorrectVersion() then --Wait 10 seconds then error message
 	C_Timer.After(10, function() prettyPrint(wrongTargetMessage) end)
 end
 
+function EasyMenu(menuList, menuFrame, anchor, x, y, displayMode, autoHideDelay )
+	if ( displayMode == "MENU" ) then
+		menuFrame.displayMode = displayMode;
+	end
+	UIDropDownMenu_Initialize(menuFrame, EasyMenu_Initialize, displayMode, nil, menuList);
+	ToggleDropDownMenu(1, nil, menuFrame, anchor, x, y, menuList);	
+end
+
+function EasyMenu_Initialize( frame, level, menuList )
+	for index = 1, #menuList do
+		local value = menuList[index]
+		if (value.text) then
+			value.index = index;
+			UIDropDownMenu_AddButton( value, level );
+		end
+	end
+end
+
 --https://wowwiki.fandom.com/wiki/API_EasyMenu
 
 local function HideTab()
@@ -794,6 +812,7 @@ loadFrame:SetScript("OnEvent", function(self, event, isLogin, isReload)
 					end },
 				}
 				local menuFrame = CreateFrame("Frame", "ServerFriendsOnlyOptionsMenuFrame", UIParent, "UIDropDownMenuTemplate")
+				MenuUtil.CreateContextMenu(menu, menuFrame, "cursor", 0, 0, "MENU", 2000);
 				EasyMenu(menu, menuFrame, "cursor", 0, 0, "MENU", 2000);
 			end
 		end)
