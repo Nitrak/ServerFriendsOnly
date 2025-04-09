@@ -10,4 +10,4 @@
 ## X-WoWI-ID: 25179
 ## X-Wago-ID: J96EjYKg
 
-ServerFriendsOnlys.xml
+ServerFriendsOnly.xml

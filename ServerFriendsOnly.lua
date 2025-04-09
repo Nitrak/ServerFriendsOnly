@@ -1,7 +1,4 @@
-local SERVERFRIENDSONLY, L = ...
-local SERVERFRIENDSONLY_NAME = GetAddOnMetadata(SERVERFRIENDSONLY, "Title")
-local SERVERFRIENDSONLY_VERSION = GetAddOnMetadata(SERVERFRIENDSONLY, "Version")
-
+local _, L = ...
 
 local loadFrame = CreateFrame("Frame")
 loadFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -53,23 +50,23 @@ local lastClicked = ""
 local friendsTable = {}
 local friendsTableLength = 0
 
-local intendedWoWProject = WOW_PROJECT_WRATH_CLASSIC
+local intendedWoWProject = WOW_PROJECT_CLASSIC
 
---[===[@non-version-retail@
---@version-classic@
-intendedWoWProject = WOW_PROJECT_CLASSIC
---@end-version-classic@
---@version-wrath@
-intendedWoWProject = WOW_PROJECT_WRATH_CLASSIC
---@end-version-wrath@
---@end-non-version-retail@]===]
+--[===[@non-version-classic@
+--@version-retail@
+intendedWoWProject = WOW_PROJECT_MAINLINE
+--@end-version-retail@
+--@version-cata@
+intendedWoWProject = WOW_PROJECT_CATA_CLASSIC or 14
+--@end-version-cata@
+--@end-non-version-classic@]===]
 
 local function IsClassic()
 	return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 end
 
-local function IsWrath()
-	return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
+local function IsCata()
+	return WOW_PROJECT_ID == WOW_PROJECT_CATA_CLASSIC or 14
 end
 
 local function IsRetail()
@@ -87,7 +84,7 @@ end
 local intendedWoWProjectName = {
 	[WOW_PROJECT_MAINLINE] = "Retail",
 	[WOW_PROJECT_CLASSIC] = "Classic",
-	[WOW_PROJECT_WRATH_CLASSIC or 11] = "Wrath of the Lich King Classic"
+	[WOW_PROJECT_CATA_CLASSIC or 14] = "Cataclysm Classic"
 }
 
 local wrongTargetMessage = "This version of Server Friends Only was packaged for World of Warcraft " ..
